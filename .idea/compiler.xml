@@ -11,5 +11,10 @@
         <module name="maven_web_plugin" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="maven-web" target="17" />
+      <module name="maven-web-plugin" target="17" />
+      <module name="maven-web-quick" target="1.5" />
+    </bytecodeTargetLevel>
   </component>
 </project>

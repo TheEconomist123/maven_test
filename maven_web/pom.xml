@@ -1,30 +1,117 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">  
-  <modelVersion>4.0.0</modelVersion>  
-  <groupId>com.zhouzz.maven</groupId>  
-  <artifactId>maven_web</artifactId>  
-  <version>1.0-SNAPSHOT</version>  
-  <packaging>war</packaging>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.zhouzz.maven</groupId>
+    <artifactId>maven_web</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>war</packaging>
 
-  <properties> 
-    <maven.compiler.source>17</maven.compiler.source>  
-    <maven.compiler.target>17</maven.compiler.target>  
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding> 
-  </properties>
+    <properties>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <!--依赖范围：
+            provided 编译时依赖，运行时无需引入，如lombok
+            compile 编译时依赖，运行时也需要引入，测试依赖也需要引入
+            runtime 运行时依赖，编译时无需引入
+            test 测试依赖，编译时无需引入
+            system 系统依赖，不会被maven管理，需要手动安装
+     -->
+
+    <dependencies>
+        <!--引入druid数据库连接池依赖-->
+
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid</artifactId>
+            <version>1.2.20</version>
+        </dependency>
+
+        <!-- 引入lombok依赖-->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.24</version>
+            <scope>provided</scope>
+        </dependency>
+        <!--  引入junit5组合依赖-->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>5.10.2</version>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>3.1.0</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/log4j/log4j -->
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>1.2.17</version>
+        </dependency>
 
 
+    </dependencies>
 
-  <build>
+    <build>
+        <!--自定义打包名称-->
+        <!--  <finalName>maven_web-1.0</finalName>-->
+        <plugins>
+            <plugin>
+                <!--引入maven-war-plugin插件，生成war包 因为jdk版本跟war版本不匹配所以要这样设置-->
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>3.3.1</version>
+            </plugin>
+            <!-- 配置tomcat插件 引入tomcat7插件，此时就可以使用了已经内置了tomcat的插件 不需要去官网下载到本地-->
+            <plugin>
+            <groupId>org.apache.tomcat.maven</groupId>
+            <artifactId>tomcat7-maven-plugin</artifactId>
+            <version>2.2</version>
+            <configuration>
+                <port>8080</port>
+                <path>/</path>
+                <!--因为tomcat7有乱码问题 所以设置uriEncoding-->
+                <uriEncoding>UTF-8</uriEncoding>
+                <server>tomcat7</server>
+            </configuration>
+            </plugin>
 
-    <plugins>
-      <plugin>
-        <!--引入maven-war-plugin插件，生成war包-->
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-war-plugin</artifactId>
-        <version>3.3.1</version>
-      </plugin>
-    </plugins>
-  </build>
+        </plugins>
+
+        <!-- 设置打包的资源位置-->
+        <resources>
+            <resource>
+                <!-- 设置资源所在目录-->
+                <directory>src/main/java</directory>
+                <!--设置资源包含类那些个类型 这样就会将非资源文件也打包-->
+                <includes>
+                    <include>**/*.xml</include>
+                </includes>
+            </resource>
+            <resource>
+                <!-- 设置资源所在目录-->
+                <directory>src/main/resources</directory>
+                <!--设置资源包含类那些个类型 这样就会将非资源文件也打包-->
+                <includes>
+                    <include>**/*.xml</include>
+                </includes>
+            </resource>
+
+
+        </resources>
+
+    </build>
 
 </project>
