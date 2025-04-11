@@ -16,8 +16,24 @@
 
     <dependencies>
 
-       <!-- 引入maven_B项目依赖 这样maven_B 里面的依赖也可以引入进来使用-->
-       <!-- 只有依赖范围是 compile 才可以进行传递-->
+        <!-- 引入maven_B项目依赖 这样maven_B 里面的依赖也可以引入进来使用-->
+        <!-- 只有依赖范围是 compile 才可以进行传递-->
+
+        <!--配置优先配置原则注意idea显示问题，也可以通过手动依赖排除原则-->
+
+        <dependency>
+            <groupId>com.zhouzz.maven</groupId>
+            <artifactId>maven_C</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <!--进行手动依赖排除以后虽然mavenC 项目在前，但是经过排除以后可是使用 mavenB里面druid依赖-->
+            <exclusions>
+                <exclusion>
+                    <groupId>com.alibaba</groupId>
+                    <artifactId>druid</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
         <dependency>
             <groupId>com.zhouzz.maven</groupId>
             <artifactId>maven_B</artifactId>
@@ -32,6 +48,16 @@
             <scope>test</scope>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.17.2</version>
+        </dependency>
+
+
+        <!--maven 冲突讲究短路原则，依赖层级越少优先级就越高 第一原则-->
+        <!--maven 第一原则一样，先声明就以谁为准 第二原则-->
 
     </dependencies>
 

@@ -8,6 +8,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="maven_web" />
         <module name="maven_java" />
+        <module name="maven_C" />
         <module name="maven_B" />
         <module name="maven_web_plugin" />
         <module name="maven_A" />
