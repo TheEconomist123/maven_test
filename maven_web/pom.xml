@@ -76,16 +76,16 @@
             </plugin>
             <!-- 配置tomcat插件 引入tomcat7插件，此时就可以使用了已经内置了tomcat的插件 不需要去官网下载到本地-->
             <plugin>
-            <groupId>org.apache.tomcat.maven</groupId>
-            <artifactId>tomcat7-maven-plugin</artifactId>
-            <version>2.2</version>
-            <configuration>
-                <port>8080</port>
-                <path>/</path>
-                <!--因为tomcat7有乱码问题 所以设置uriEncoding-->
-                <uriEncoding>UTF-8</uriEncoding>
-                <server>tomcat7</server>
-            </configuration>
+                <groupId>org.apache.tomcat.maven</groupId>
+                <artifactId>tomcat7-maven-plugin</artifactId>
+                <version>2.2</version>
+                <configuration>
+                    <port>8080</port>
+                    <path>/</path>
+                    <!--因为tomcat7有乱码问题 所以设置uriEncoding-->
+                    <uriEncoding>UTF-8</uriEncoding>
+                    <server>tomcat7</server>
+                </configuration>
             </plugin>
 
         </plugins>
