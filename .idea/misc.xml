@@ -10,6 +10,7 @@
         <option value="$PROJECT_DIR$/maven_A/pom.xml" />
         <option value="$PROJECT_DIR$/maven_B/pom.xml" />
         <option value="$PROJECT_DIR$/maven_C/pom.xml" />
+        <option value="$PROJECT_DIR$/maven_parent/pom.xml" />
       </list>
     </option>
   </component>
